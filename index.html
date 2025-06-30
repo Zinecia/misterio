@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LzPlayVIP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2468/2468825.png" type="image/x-icon" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+    header {
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      z-index: 50;
+    }
+    #header-title, #header-recomendadas {
+      transition: opacity 0.3s ease;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    #main-title {
+      transition: opacity 0.3s ease;
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body class="relative min-h-screen bg-black text-white overflow-x-hidden">
+
+  <!-- Fondo -->
+  <div class="absolute inset-0 z-0 h-[60vh] md:h-[70vh]">
+    <img
+      src="https://www.lavanguardia.com/files/image_449_220/uploads/2020/05/08/5fa924f10a8ff.jpeg"
+      alt="Fondo"
+      class="w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-blue-900/60"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black"></div>
+  </div>
+
+  
+  <div class="relative z-10">
+
+   
+    <header id="main-header" class="pt-3 pb-3 px-4 sm:pt-4 sm:pb-4 sm:px-6 flex items-center space-x-3 sm:space-x-4 text-white">
+      <a href="javascript:window.history.back();" aria-label="Volver" class="text-white text-2xl sm:text-3xl flex-shrink-0">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3dK3-XAKrEia-lWmiUqAYRfFQ1lR9eJX6ZZH8e_vHf576qf9GJjIWBW9Jg5LsilXX7WO2MOEkg5gzc4pESziaPeMJ9ws9mwtCDdp3p_17D0e0Uop_ZxavwwJeNLBvoyZJ0cxTKQpjzrJIR6LjJslB24tj-77AYrRCacQ3F2S2VPoXpPzPhM1zndxyd1Rg/s3307/B64D5386-DCA4-410B-A0A6-6ACB19D0A06F.png"
+        alt="Logo"
+        class="h-6 sm:h-7 object-contain flex-shrink-0" />
+      
+      <h1 id="header-title" class="ml-2 sm:ml-4 text-lg sm:text-xl font-normal opacity-0 max-w-xs sm:max-w-sm"></h1>
+
+      <div class="flex-1"></div>
+
+    
+      <button id="header-recomendadas" class="opacity-0 transition-opacity duration-300 border border-white rounded-full px-3 py-1 text-xs sm:text-sm flex items-center space-x-1 whitespace-nowrap">
+        <i class="fas fa-random"></i> <span>Aleatorio</span>
+      </button>
+    </header>
+
+    <main class="px-4 sm:px-6 pb-6 pt-14 max-w-7xl mx-auto">
+
+
+  <div class="flex justify-between items-center mb-3">
+    <h1 id="main-title" class="text-3xl font-normal">Misterio 🔍</h1>
+    <button id="btn-recomendadas" class="border border-white rounded-full px-3 py-1 text-sm flex items-center">
+      <i class="fas fa-random"></i>
+    </button>
+  </div>
+
+
+      <p id="description" class="text-white text-base mb-4 max-w-xl leading-relaxed">
+        Nada es lo que parece… Adentrate en historias llenas de secretos, enigmas sin resolver y verdades ocultas que te mantendran al borde del asiento. Cada pista te acerca mas a la verdad, pero cuidado… algunos misterios no quieren ser descubiertos.
+
+Suspenso, intriga y giros inesperados te esperan en esta coleccion de series y peliculas que desafian tu mente.
+Te atreves a descubrir lo que se esconde en la oscuridad?
+      </p>
+
+
+      <div class="flex items-center justify-center text-white text-sm mb-4 space-x-3">
+        <div class="border-b border-white w-16"></div>
+        <span id="contenido-total" class="whitespace-nowrap">Contenido: 0</span>
+        <div class="border-b border-white w-16"></div>
+      </div>
+
+  <!-- Contenedor de carteles -->
+  <div id="posters-grid" class="grid grid-cols-3 sm:grid-cols-[repeat(auto-fit,_minmax(140px,_1fr))] gap-3 mt-3">
+    <!--PEGAR CONTENIDO AQUI ABAJO-->
+
+	
+
+  </div>
+</main>
+
+  </div>
+
+  <script>
+    const mainTitle = document.getElementById('main-title');
+    const headerTitle = document.getElementById('header-title');
+    const header = document.getElementById('main-header');
+    const description = document.getElementById('description');
+    const mainBtnRecomendadas = document.getElementById('btn-recomendadas');
+    const headerBtnRecomendadas = document.getElementById('header-recomendadas');
+    const postersGrid = document.getElementById('posters-grid');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+          header.classList.add('fixed', 'top-0', 'left-0', 'right-0', 'bg-black/90', 'backdrop-blur-sm', 'shadow-md', 'z-50');
+          headerTitle.textContent = mainTitle.textContent;
+          headerTitle.classList.remove('opacity-0');
+          headerTitle.classList.add('opacity-100');
+          headerBtnRecomendadas.classList.remove('opacity-0');
+          headerBtnRecomendadas.classList.add('opacity-100');
+          mainTitle.classList.add('opacity-0');
+          mainBtnRecomendadas.classList.add('hidden');
+        } else {
+          header.classList.remove('fixed', 'top-0', 'left-0', 'right-0', 'bg-black/90', 'backdrop-blur-sm', 'shadow-md');
+          headerTitle.classList.remove('opacity-100');
+          headerTitle.classList.add('opacity-0');
+          headerBtnRecomendadas.classList.remove('opacity-100');
+          headerBtnRecomendadas.classList.add('opacity-0');
+          mainTitle.classList.remove('opacity-0');
+          mainBtnRecomendadas.classList.remove('hidden');
+        }
+      });
+    }, { threshold: 0 });
+
+    observer.observe(description);
+
+  
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function reorganizarPeliculas() {
+      const items = Array.from(postersGrid.querySelectorAll('a'));
+      const shuffled = shuffle(items);
+      postersGrid.innerHTML = '';
+      shuffled.forEach(item => postersGrid.appendChild(item));
+    }
+
+    mainBtnRecomendadas.addEventListener('click', reorganizarPeliculas);
+    headerBtnRecomendadas.addEventListener('click', reorganizarPeliculas);
+	
+
+const totalContenedor = document.getElementById('contenido-total');
+function actualizarTotalContenido() {
+  const total = postersGrid.querySelectorAll('a').length;
+  totalContenedor.textContent = `Contenido: ${total}`;
+}
+actualizarTotalContenido();
+
+  </script>
+<script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+</body>
+</html>
